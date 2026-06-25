@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prevailing Church Kenya | Eldoret</title>
-<meta name="description" content="Prevailing Church, Eldoret-Kenya. Preaching the Gospel of the Kingdom of God to all nations by word and example.">
+<title>Prevailing School of Ministry | Prevailing Church – Kenya</title>
+<meta name="description" content="Prevailing School of Ministry — coming soon. A discipleship and leadership training initiative of Prevailing Church, Eldoret-Kenya.">
 <style>
   :root{
     --white:#ffffff;
@@ -739,61 +739,78 @@
     outline:2px solid var(--red);
     outline-offset:2px;
   }
-  .school-ministry{
-    max-width: var(--max);
-    margin: 0 auto 80px;
-    padding: 40px 28px;
-}
 
-.som-content{
-    background: linear-gradient(135deg, #011C47 0%, #0c2c5e 100%);
-    border-left: 5px solid #D10000;
-    border-radius: 6px;
-    padding: 40px;
-    text-align: center;
-    color: #fff;
-    box-shadow: 0 12px 30px rgba(1, 28, 71, 0.15);
-}
+  /* ============ COMING SOON PAGE ============ */
+  .soon-hero{
+    position:relative;
+    background:
+      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(209,0,0,0.10), transparent 60%),
+      linear-gradient(180deg, var(--navy) 0%, #062453 62%, #0c2c5e 100%);
+    color:var(--white);
+    overflow:hidden;
+    padding:140px 0 130px;
+    text-align:center;
+  }
+  .soon-hero::before{
+    content:'';
+    position:absolute;inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 64px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 64px);
+    pointer-events:none;
+  }
+  .soon-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+  .soon-eyebrow{
+    font-size:12.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+    color:#ff8a8a;margin-bottom:22px;display:flex;align-items:center;justify-content:center;gap:10px;
+  }
+  .soon-eyebrow .dash{width:28px;height:1.5px;background:#ff8a8a;display:inline-block;}
+  .soon-hero h1{
+    color:var(--white);font-size:clamp(36px,5.2vw,58px);margin-bottom:22px;
+  }
+  .soon-badge{
+    display:inline-block;margin-bottom:26px;
+    padding:8px 20px;border-radius:30px;
+    border:1.5px solid rgba(255,255,255,0.3);
+    font-size:12.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--white);
+  }
+  .soon-hero p.lead{
+    font-size:17px;color:rgba(255,255,255,0.78);max-width:540px;margin:0 auto 36px;
+  }
 
-.som-content h2{
-    margin-bottom: 12px;
-    font-family: 'Fraunces', serif;
-    font-size: 2rem;
-    font-weight: 600;
-    color: #fff;
-}
+  .soon-focus{
+    padding:90px 0;background:var(--white);
+  }
+  .soon-focus-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;
+    margin-top:48px;
+  }
+  .soon-focus-card{background:var(--white);padding:34px 28px;}
+  .soon-focus-card .sf-num{
+    font-weight:700;font-size:13px;color:var(--red);letter-spacing:0.1em;margin-bottom:14px;
+  }
+  .soon-focus-card h3{font-size:17px;margin-bottom:10px;}
+  .soon-focus-card p{color:var(--ink-soft);font-size:14.5px;line-height:1.6;}
+  @media (max-width:880px){
+    .soon-focus-grid{grid-template-columns:1fr;}
+  }
 
-.som-content p{
-    max-width: 650px;
-    margin: 0 auto 24px;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.9);
-}
-
-.som-btn{
-    display: inline-block;
-    background: #D10000;
-    color: #fff;
-    text-decoration: none;
-    padding: 14px 32px;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: all .3s ease;
-}
-
-.som-btn:hover{
-    background: #b30000;
-    transform: translateY(-2px);
-}
+  .soon-notify{
+    padding:80px 0 100px;background:var(--navy-pale);text-align:center;
+  }
+  .soon-notify h2{font-size:clamp(24px,2.8vw,30px);margin-bottom:14px;}
+  .soon-notify p{color:var(--ink-soft);font-size:15.5px;max-width:480px;margin:0 auto 28px;}
 </style>
 </head>
 <body>
 
 <header>
   <div class="nav-row">
-    <a href="#top" class="brand">
+    <a href="index.html" class="brand">
       <div class="logo-slot" id="logoSlot">
-        <img id="logoImg" src="./images/logo.png" alt="Prevailing Church logo">
+        <img id="logoImg" src="" alt="Prevailing Church logo">
         <span class="logo-mark" id="logoMark">PC</span>
       </div>
       <div class="brand-text">
@@ -806,491 +823,92 @@
     </button>
     <nav>
       <ul id="navList">
-        <li><a href="#about">About</a></li>
-        <li><a href="#pillars">Our Foundations</a></li>
-        <li><a href="#values">Core Values</a></li>
-        <li><a href="#founder">Founder</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#services">Service Times</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#pillars">Our Foundations</a></li>
+        <li><a href="index.html#values">Core Values</a></li>
+        <li><a href="index.html#founder">Founder</a></li>
+        <li><a href="index.html#gallery">Gallery</a></li>
+        <li><a href="index.html#services">Service Times</a></li>
         <li><a href="school-of-ministry.html">School of Ministry</a></li>
-        <li><a href="#contact" class="nav-cta">Visit Us</a></li>
+        <li><a href="index.html#contact" class="nav-cta">Visit Us</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<main id="top">
+<main>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-eyebrow"><span class="dash"></span>Eldoret &middot; Kenya</div>
-        <h1>Advancing the Legacy<br>of <em>Christ</em> Today.</h1>
-        <p class="lead">Prevailing Church – Kenya is a Christ-centered ministry committed to advancing the Kingdom of God through the preaching of the Gospel, discipleship, prayer, worship, and compassionate service.</p>
-        <div class="hero-actions">
-          <a href="#services" class="btn btn-primary">Join a Service</a>
-          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
-        </div>
-      </div>
-      <div class="hero-verse">
-        <p class="verse-text">"And from the days of John the Baptist until now, the kingdom of heaven suffereth violence, and the violent take it by force."</p>
-        <span class="verse-ref">Matthew 11:12</span>
-      </div>
-    </div>
-    <div class="hero-strip">
-      <div class="wrap">
-        <div class="item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          P. O. Box 2812 - 30100, Eldoret-Kenya
-        </div>
-        <div class="item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          +254 720-805 903
-        </div>
-        <div class="item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          Services held weekly &mdash; all are welcome
-        </div>
-      </div>
+  <!-- COMING SOON HERO -->
+  <section class="soon-hero">
+    <div class="wrap soon-inner">
+      <div class="soon-eyebrow"><span class="dash"></span>A Ministry of Prevailing Church &ndash; Kenya<span class="dash"></span></div>
+      <span class="soon-badge">Coming Soon</span>
+      <h1>Prevailing School<br>of Ministry</h1>
+      <p class="lead">A new season of training, discipleship, and leadership development is on the way — equipping believers to serve, lead, and advance the Kingdom with conviction and skill.</p>
     </div>
   </section>
 
-  <!-- WELCOME -->
-  <section class="welcome" id="welcome">
+  <!-- FOCUS TEASER -->
+  <section class="soon-focus">
     <div class="wrap">
-      <div class="welcome-inner">
-        <span class="eyebrow">Welcome!</span>
-        <h2>Welcome to Prevailing Church – Kenya</h2>
-        <p>Prevailing Church – Kenya is a Christ-centered ministry committed to advancing the Kingdom of God through the preaching of the Gospel, discipleship, prayer, worship, and compassionate service. We exist to raise disciples who passionately follow Jesus Christ and impact their generation with the transforming power of His Word.</p>
-        <p>As a church, we are dedicated to building strong believers, healthy families, vibrant communities, and a lasting legacy for Christ. Through the power of the Holy Spirit, we seek to bring hope to the hopeless, strength to the weary, and salvation to all who call upon the name of the Lord.</p>
+      <div class="pillars-head" style="margin:0 auto;text-align:center;max-width:600px;">
+        <span class="eyebrow">What To Expect</span>
+        <h2>Raising Leaders for the Harvest</h2>
+        <p style="margin:0 auto;">Prevailing School of Ministry will carry forward the same vision that drives Prevailing Church – Kenya: discipleship, leadership, and Kingdom advancement.</p>
+      </div>
+
+      <div class="soon-focus-grid">
+        <div class="soon-focus-card">
+          <div class="sf-num">01</div>
+          <h3>Discipleship Training</h3>
+          <p>Grounding believers in the Word and in a living, daily walk with Jesus Christ.</p>
+        </div>
+        <div class="soon-focus-card">
+          <div class="sf-num">02</div>
+          <h3>Leadership Development</h3>
+          <p>Raising and equipping leaders for ministry, church planting, and Kingdom service.</p>
+        </div>
+        <div class="soon-focus-card">
+          <div class="sf-num">03</div>
+          <h3>Evangelism &amp; Missions</h3>
+          <p>Preparing believers to reach the un-churched and the un-reached with the Gospel.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- HERO PHOTO BANNER -->
-  <section class="hero-banner">
-    <img src="./images/logo.png" alt="">
-    <div class="hb-placeholder">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Congregation Photo</span>
-    </div>
-    <div class="hb-caption">
-      <p>"Gathered in one place, with one purpose — to know Him, and to make Him known."</p>
-    </div>
-  </section>
-
-  <!-- FOUR PILLARS -->
-  <section class="pillars" id="pillars">
+  <!-- NOTIFY -->
+  <section class="soon-notify">
     <div class="wrap">
-      <div class="pillars-head">
-        <span class="eyebrow">What We Stand On</span>
-        <h2>Our Foundations</h2>
-        <p>Four convictions shape everything Prevailing Church does — from the pulpit to the street, from Eldoret to the nations.</p>
-      </div>
-
-      <div class="pillars-frame">
-        <div class="pillar-row">
-          <div class="pillar-label"><span>Our Aim</span></div>
-          <div class="pillar-body">
-            <p>To preach the Gospel of the Kingdom of God to all nations by word and example.</p>
-            <p class="pillar-detail">We are committed to proclaiming the message of Jesus Christ with integrity, demonstrating His love through our lives, and making His Kingdom known in every sphere of society.</p>
-          </div>
-        </div>
-        <div class="pillar-row">
-          <div class="pillar-label"><span>Our Mission</span></div>
-          <div class="pillar-body">
-            <p>To Know Christ and Make Him Known by Reaching All.</p>
-            <p class="pillar-detail">Our mission is to cultivate a deep and personal relationship with Jesus Christ while passionately sharing His Gospel with every person, community, and nation. We strive to raise disciples who live for Christ and lead others into a life-changing encounter with Him.</p>
-          </div>
-        </div>
-        <div class="pillar-row">
-          <div class="pillar-label"><span>Our Vision</span></div>
-          <div class="pillar-body">
-            <p>Touching the Un-churched and the Un-reached with the Reached through the Gospel Today.</p>
-            <p class="pillar-detail">We envision a vibrant movement of believers reaching beyond church walls to engage those who have never heard the Gospel and those who have become disconnected from the faith, bringing them into a transforming relationship with Jesus Christ.</p>
-          </div>
-        </div>
-        <div class="pillar-row">
-          <div class="pillar-label"><span>Our Purpose</span></div>
-          <div class="pillar-body">
-            <p>To Bring Glory to God by Advancing Godly Living through Spiritual and Physical Nourishment.</p>
-            <p class="pillar-detail">We seek to glorify God by nurturing the whole person — spiritually, emotionally, and physically — through biblical teaching, prayer, discipleship, fellowship, and practical acts of love and service.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PHOTO BREAK -->
-  <section class="photo-break">
-    <div class="photo-break-grid">
-      <div class="pb-img">
-        <img src="./images/logo.png" alt="">
-        <div class="pb-placeholder">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Worship Moment</span>
-        </div>
-        <div class="pb-cap">Sunday Worship</div>
-      </div>
-      <div class="pb-img">
-        <img src="./images/logo.png" alt="">
-        <div class="pb-placeholder">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-          <span>Word & Teaching</span>
-        </div>
-        <div class="pb-cap">The Word Preached</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCRIPTURE BAND -->
-  <section class="scripture-band">
-    <div class="wrap">
-      <span class="eyebrow" style="color:#ff8a8a;display:block;margin-bottom:18px;">Key Scriptures</span>
-      <div class="scripture-grid scripture-grid-2">
-        <div class="scripture-card">
-          <span class="ref">Matthew 6:33</span>
-          <p>But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.</p>
-        </div>
-        <div class="scripture-card">
-          <span class="ref">2 Corinthians 11:28</span>
-          <p>Beside those things that are without, that which cometh upon me daily, the care of all the churches.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CORE VALUES -->
-  <section class="values" id="values">
-    <div class="wrap">
-      <div class="pillars-head">
-        <span class="eyebrow">What We Hold To</span>
-        <h2>Our Core Values</h2>
-        <p>Eight convictions that shape our worship, our leadership, and our witness in the world.</p>
-      </div>
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="v-num">01</div>
-          <h3>Christ-Centered Living</h3>
-          <p>Jesus Christ is the foundation, focus, and Lord of everything we do.</p>
-        </div>
-        <div class="value-card">
-          <div class="v-num">02</div>
-          <h3>Biblical Authority</h3>
-          <p>The Holy Scriptures are the inspired and infallible Word of God, guiding our faith, doctrine, and daily living.</p>
-        </div>
-        <div class="value-card">
-          <div class="v-num">03</div>
-          <h3>Prayer and Worship</h3>
-          <p>We are devoted to prayer and passionate worship as essential expressions of our relationship with God.</p>
-        </div>
-        <div class="value-card">
-          <div class="v-num">04</div>
-          <h3>Evangelism and Discipleship</h3>
-          <p>We are called to reach the lost, nurture believers, and equip disciples for Kingdom service.</p>
-        </div>
-        <div class="value-card">
-          <div class="v-num">05</div>
-          <h3>Holiness and Integrity</h3>
-          <p>We pursue a life that reflects God's character through obedience, righteousness, and godly conduct.</p>
-        </div>
-        <div class="value-card">
-          <div class="v-num">06</div>
-          <h3>Love and Compassion</h3>
-          <p>We demonstrate Christ's love through service, generosity, and care for individuals, families, and communities.</p>
-        </div>
-        <div class="value-card">
-          <div class="v-num">07</div>
-          <h3>Unity and Fellowship</h3>
-          <p>We value genuine relationships and the strength that comes from walking together as one body in Christ.</p>
-        </div>
-        <div class="value-card">
-          <div class="v-num">08</div>
-          <h3>Kingdom Advancement</h3>
-          <p>We are committed to expanding God's Kingdom locally, nationally, and globally for His glory.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DECLARATION -->
-  <section class="declaration">
-    <div class="wrap">
-      <span class="eyebrow">Our Declaration</span>
-      <h2>A People of Faith, Prayer, Purpose, and Vision</h2>
-      <p>We believe that Jesus Christ is building His Church, and that the gates of hell shall not prevail against it, as stated in Matthew 16:13&ndash;18. We are a people of faith, prayer, purpose, and vision, committed to advancing the legacy of Christ in our generation and beyond.
-        <span class="decl-ref">Matthew 16:13&ndash;18</span>
-      </p>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="wrap">
-      <div class="about-grid">
-        <div class="about-media">
-          <img src="./images/logo.png" alt="Prevailing Church" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-          <div class="corner tl"></div>
-          <div class="corner br"></div>
-          <div class="frame-label">Church Photo<br>Space</div>
-        </div>
-        <div class="about-copy">
-          <span class="eyebrow">Who We Are</span>
-          <h2>A church built to reach, not just to gather.</h2>
-          <p>Prevailing Church in Eldoret is committed to advancing the Kingdom of God with urgency — standing on the Word, reaching beyond our walls, and nourishing believers in spirit and in body.</p>
-
-          <div class="vm-list">
-            <div class="vm-item">
-              <span class="vm-tag">Reach</span>
-              <p>We go to the un-churched and the un-reached, carrying the gospel through the witness of those already reached.</p>
-            </div>
-            <div class="vm-item">
-              <span class="vm-tag">Know</span>
-              <p>Every ministry flows from knowing Christ personally — worship, teaching, and discipleship rooted in Scripture.</p>
-            </div>
-            <div class="vm-item">
-              <span class="vm-tag">Nourish</span>
-              <p>We care for the whole person, advancing godly life through both spiritual depth and practical, physical support.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2026 CHURCH THEME -->
-  <section class="theme" id="theme">
-    <div class="wrap">
-      <div class="theme-inner">
-        <span class="eyebrow">2026 Church Theme</span>
-        <div class="theme-statement">Aligning and Advancing in Authority</div>
-        <div class="theme-verse">
-          <p>"And Jesus increased in wisdom and stature, and in favour with God and man."</p>
-          <span>Luke 2:52 (KJV)</span>
-        </div>
-        <p class="theme-copy">At Prevailing Church – Kenya, we are committed to growing in spiritual maturity, walking in divine authority, and advancing God's purposes in our generation as we align ourselves with His will and His Word &mdash; Matthew 11:11&ndash;12.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section class="gallery" id="gallery">
-    <div class="wrap">
-      <div class="gallery-head">
-        <div>
-          <span class="eyebrow">Life at Prevailing Church</span>
-          <h2>Gallery</h2>
-        </div>
-        <p>Moments from worship, outreach, and fellowship — replace these frames with your own photographs.</p>
-      </div>
-
-      <div class="gallery-grid">
-        <div class="g-item span-2 span-row2">
-          <img src="./images/logo.png" alt="Prevailing Church">
-          <div class="g-placeholder">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Sunday Worship</span>
-          </div>
-          <div class="g-cap">Sunday Worship Service</div>
-        </div>
-        <div class="g-item">
-          <img src="./images/logo.png" alt="Prevailing Church">
-          <div class="g-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Outreach</span>
-          </div>
-          <div class="g-cap">Community Outreach</div>
-        </div>
-        <div class="g-item">
-          <img src="./images/logo.png" alt="Prevailing Church">
-          <div class="g-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Fellowship</span>
-          </div>
-          <div class="g-cap">Fellowship Gathering</div>
-        </div>
-        <div class="g-item">
-          <img src="./images/logo.png" alt="Prevailing Church">
-          <div class="g-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Choir</span>
-          </div>
-          <div class="g-cap">Choir Ministration</div>
-        </div>
-        <div class="g-item">
-          <img src="./images/logo.png" alt="Prevailing Church">
-          <div class="g-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Baptism</span>
-          </div>
-          <div class="g-cap">Water Baptism</div>
-        </div>
-      </div>
-
-      <p class="gallery-note">Photo frames shown above are placeholders. Send through your event photos and we'll drop them in at full resolution.</p>
-    </div>
-  </section>
-
-  <!-- FOUNDER / BISHOP -->
-  <section class="founder" id="founder">
-    <div class="wrap">
-      <div class="founder-grid">
-        <div class="founder-media">
-          <img src="./images/logo.png" alt="Bishop Dr. Josphat Mamet">
-          <div class="fm-placeholder">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
-            <span>Portrait Photo</span>
-          </div>
-          <div class="fm-tag">
-            <span class="fm-name">Bishop Dr. Josphat Mamet</span>
-            <span class="fm-role">Founder &amp; Presiding Bishop</span>
-          </div>
-        </div>
-
-        <div class="founder-copy">
-          <span class="eyebrow">About the Founder &amp; Presiding Bishop</span>
-          <h2>Bishop Dr. Josphat Mamet</h2>
-          <p>Bishop Dr. Josphat Mamet is the Founder and Presiding Bishop of Prevailing Church – Kenya, a dynamic ministry committed to Advancing the Legacy of Christ Today through evangelism, discipleship, church planting, leadership development, and Kingdom transformation.</p>
-          <p>Called by God with a passion for the Gospel and a deep burden for souls, Bishop Mamet has dedicated his life to proclaiming the message of Jesus Christ and raising disciples who live out their faith with conviction and purpose. His ministry is driven by the zeal expressed in Matthew 11:12, believing that the advancement of God's Kingdom requires spiritual determination, bold faith, and unwavering commitment.</p>
-          <p>A visionary church planter, Bishop Mamet carries a strong apostolic burden to establish vibrant, Christ-centered congregations that serve as beacons of hope and centers of spiritual growth within their communities. His ministry reflects the heart of the Apostle Paul as expressed in 2 Corinthians 11:28, carrying a continual concern and responsibility for the well-being, growth, and strengthening of local churches.</p>
-          <p>Under his leadership, Prevailing Church – Kenya has continued to expand its reach through church planting, evangelistic missions, discipleship initiatives, leadership training, and community engagement. His vision remains focused on touching the un-churched and the un-reached with the Gospel of Jesus Christ, while equipping believers to impact their generation for God's glory.</p>
-          <p>Bishop Mamet is also an accomplished author whose writings seek to inspire spiritual growth, leadership excellence, Kingdom-minded living, and a deeper understanding of God's purpose for His people. Through his books, teachings, and mentorship, he continues to influence leaders, pastors, and believers across diverse backgrounds.</p>
-          <p>Beyond ministry, Bishop Mamet is a devoted family man who values the biblical foundation of marriage and family life. Together with his family, he exemplifies Christian faith, servant leadership, and commitment to God's calling, providing a model of godly living for both the Church and society.</p>
-          <p>As Founder and Presiding Bishop, he remains committed to building strong churches, raising faithful leaders, mentoring the next generation, and advancing God's Kingdom through the transforming power of the Gospel.</p>
-
-          <div class="focus-block">
-            <h3>Visionary Focus</h3>
-            <ul class="focus-list">
-              <li>Church Planting and Church Growth</li>
-              <li>Evangelism and Missions</li>
-              <li>Leadership Development</li>
-              <li>Discipleship and Mentorship</li>
-              <li>Kingdom Advancement</li>
-              <li>Community Transformation</li>
-              <li>Family and Generational Impact</li>
-            </ul>
-          </div>
-
-          <div class="motto-block">
-            <span class="m-label">Personal Motto</span>
-            <p>"Preaching the Legacy of Christ In-deep Affliction and Solidarity for Christ!"</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICE TIMES -->
-  <section class="services" id="services">
-    <div class="wrap">
-      <div class="pillars-head">
-        <span class="eyebrow">Come As You Are</span>
-        <h2>Service Times</h2>
-        <p>We gather through the week for worship, prayer, and the study of the Word. Everyone is welcome.</p>
-      </div>
-
-      <div class="services-layout">
-        <div class="services-media">
-          <img src="./images/logo.png" alt="Prevailing Church">
-          <div class="sm-placeholder">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Prayer & Fellowship</span>
-          </div>
-        </div>
-
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="day">Sunday</div>
-            <h3>Main Worship Service</h3>
-            <div class="time">9:00 AM</div>
-            <p>Worship, the Word, and Holy Communion on first Sundays.</p>
-          </div>
-          <div class="service-card">
-            <div class="day">Wednesday</div>
-            <h3>Midweek Bible Study</h3>
-            <div class="time">5:30 PM</div>
-            <p>In-depth teaching and discussion to deepen our walk with Christ.</p>
-          </div>
-          <div class="service-card">
-            <div class="day">Friday</div>
-            <h3>Prayer & Intercession</h3>
-            <div class="time">6:00 PM</div>
-            <p>Corporate prayer for the church, our nation, and the nations.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="school-ministry">
-  <div class="som-content">
-    <h2>Our School of Ministry</h2>
-    <p>
-      Equipping believers through biblical teaching, spiritual growth,
-      leadership development, and practical ministry training.
-    </p>
-    <a href="school-of-ministry.html" class="som-btn">
-      Learn More
-    </a>
-  </div>
-</section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="wrap">
-      <div class="contact-grid">
-        <div class="contact-copy">
-          <span class="eyebrow">Visit Or Reach Out</span>
-          <h2>We'd love to have you.</h2>
-          <p>Whether you're in Eldoret for a season or have called it home for years, there's a place for you at Prevailing Church.</p>
-        </div>
-
-        <div class="contact-details">
-          <div class="cdet">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <div>
-              <div class="label">Postal Address</div>
-              <div class="val">P. O. Box 2812 - 30100, Eldoret-Kenya</div>
-            </div>
-          </div>
-          <div class="cdet">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            <div>
-              <div class="label">Phone</div>
-              <a class="val" href="tel:+254720805903">+254 720-805 903</a>
-            </div>
-          </div>
-          <div class="cdet">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            <div>
-              <div class="label">Service Days</div>
-              <div class="val">Sunday &middot; Wednesday &middot; Friday</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div class="fb-brand">
-          <div class="logo-slot">
-            <span class="logo-mark">PC</span>
-          </div>
-          <span>&copy; <span id="year"></span> Prevailing Church, Eldoret-Kenya. All rights reserved.</span>
-        </div>
-        <div class="fb-links">
-          <a href="#about">About</a>
-          <a href="#pillars">Foundations</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </div>
+      <h2>Want to be the first to know?</h2>
+      <p>Enrollment details, start dates, and the full curriculum for Prevailing School of Ministry will be announced soon. Reach out to us directly for updates.</p>
+      <a href="index.html#contact" class="btn btn-primary" style="color:var(--white);">Get in Touch</a>
     </div>
   </section>
 
 </main>
 
+<!-- FOOTER -->
+<section class="contact" style="padding-top:0;">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.12);padding-top:30px;">
+      <div class="fb-brand">
+        <div class="logo-slot">
+          <span class="logo-mark">PC</span>
+        </div>
+        <span>&copy; <span id="year"></span> Prevailing Church, Eldoret-Kenya. All rights reserved.</span>
+      </div>
+      <div class="fb-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#pillars">Foundations</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <script>
-  // Mobile nav toggle
   const menuBtn = document.getElementById('menuBtn');
   const navList = document.getElementById('navList');
   menuBtn.addEventListener('click', () => {
@@ -1304,12 +922,8 @@
     });
   });
 
-  // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Generic image/placeholder toggler:
-  // Any <img> with an empty src stays hidden and its sibling placeholder/frame-label shows instead.
-  // Once a real src is set (file path or base64 string), the image shows and the placeholder hides automatically.
   (function setupImages(){
     const placeholderClasses = ['hb-placeholder','pb-placeholder','g-placeholder','fm-placeholder','sm-placeholder','frame-label','logo-mark'];
     document.querySelectorAll('img').forEach(img => {
