@@ -498,25 +498,25 @@
 
   .gallery-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    grid-template-rows:repeat(2,220px);
-    gap:14px;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
   }
   .g-item{
     position:relative;
     border-radius:3px;
     overflow:hidden;
+    aspect-ratio:1/1;
     background:linear-gradient(150deg,#0c2c5e,#011C47);
     cursor:pointer;
   }
   .g-item img{width:100%;height:100%;object-fit:cover;}
   .g-item .g-placeholder{
     position:absolute;inset:0;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
-    color:rgba(255,255,255,0.55);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    color:rgba(255,255,255,0.5);
   }
-  .g-item .g-placeholder svg{opacity:0.6;}
-  .g-item .g-placeholder span{font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;}
+  .g-item .g-placeholder svg{opacity:0.55;width:20px;height:20px;}
+  .g-item .g-placeholder span{font-size:10px;letter-spacing:0.06em;text-transform:uppercase;}
   .g-item::after{
     content:'';position:absolute;inset:0;
     background:linear-gradient(180deg, transparent 55%, rgba(1,12,33,0.55) 100%);
@@ -524,26 +524,80 @@
   }
   .g-item:hover::after{opacity:1;}
   .g-item .g-cap{
-    position:absolute;left:14px;bottom:12px;
-    color:var(--white);font-size:12.5px;font-weight:600;
+    position:absolute;left:10px;bottom:9px;right:10px;
+    color:var(--white);font-size:11.5px;font-weight:600;
     opacity:0;transform:translateY(6px);
     transition:opacity .25s ease, transform .25s ease;
     z-index:2;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   }
   .g-item:hover .g-cap{opacity:1;transform:translateY(0);}
 
-  .g-item.span-2{grid-column:span 2;}
-  .g-item.span-row2{grid-row:span 2;}
+  .gallery-more{
+    display:flex;justify-content:center;margin-top:36px;
+  }
+  .gallery-more button{
+    font-family:var(--font);font-size:14px;font-weight:700;
+    color:var(--navy);background:var(--white);
+    border:1.5px solid var(--navy);border-radius:30px;
+    padding:12px 30px;cursor:pointer;
+    transition:background .2s ease,color .2s ease;
+  }
+  .gallery-more button:hover{background:var(--navy);color:var(--white);}
+  .gallery-more button[hidden]{display:none;}
 
-  @media (max-width:900px){
-    .gallery-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,200px);}
-    .g-item.span-2{grid-column:span 1;}
-    .g-item.span-row2{grid-row:span 1;}
+  @media (max-width:1000px){
+    .gallery-grid{grid-template-columns:repeat(4,1fr);}
+  }
+  @media (max-width:760px){
+    .gallery-grid{grid-template-columns:repeat(3,1fr);gap:8px;}
+  }
+  @media (max-width:520px){
+    .gallery-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
   }
 
   .gallery-note{
     margin-top:22px;font-size:13.5px;color:var(--ink-soft);
     border-left:2px solid var(--red);padding-left:14px;
+  }
+
+  /* ---- Lightbox ---- */
+  .lightbox{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(1,8,24,0.98);
+    display:none;align-items:center;justify-content:center;
+    padding:24px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox-stage{
+    position:relative;max-width:min(900px,92vw);max-height:86vh;
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+  }
+  .lightbox-stage img{
+    max-width:100%;max-height:76vh;width:auto;height:auto;
+    border-radius:4px;display:block;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .lightbox-cap{color:rgba(255,255,255,0.85);font-size:14px;text-align:center;}
+  .lightbox-close,.lightbox-prev,.lightbox-next{
+    position:fixed;
+    background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);
+    color:var(--white);border-radius:50%;
+    width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:background .2s ease;
+  }
+  .lightbox-close:hover,.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,0.2);}
+  .lightbox-close{top:20px;right:20px;}
+  .lightbox-prev{left:20px;top:50%;transform:translateY(-50%);}
+  .lightbox-next{right:20px;top:50%;transform:translateY(-50%);}
+  .lightbox-counter{
+    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+    color:rgba(255,255,255,0.6);font-size:12.5px;letter-spacing:0.05em;
+  }
+  @media (max-width:600px){
+    .lightbox-prev{left:8px;width:38px;height:38px;}
+    .lightbox-next{right:8px;width:38px;height:38px;}
+    .lightbox-close{top:10px;right:10px;width:38px;height:38px;}
   }
 
   /* ============ FOUNDER / BISHOP ============ */
@@ -609,6 +663,93 @@
     .founder-grid{grid-template-columns:1fr;gap:36px;}
     .founder-media{aspect-ratio:16/10;}
     .focus-list{grid-template-columns:1fr;}
+  }
+
+  /* ---- Founder social / contact links ---- */
+  .founder-links{
+    display:flex;flex-wrap:wrap;gap:12px;
+    margin-top:28px;padding-top:26px;border-top:1px solid var(--line);
+  }
+  .founder-link{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 16px;border-radius:30px;
+    background:var(--navy-pale);border:1px solid var(--line);
+    font-size:13.5px;font-weight:600;color:var(--navy);
+    transition:background .2s ease,border-color .2s ease,transform .2s ease;
+  }
+  .founder-link svg{flex-shrink:0;color:var(--red);}
+  .founder-link:hover{background:var(--navy);color:var(--white);border-color:var(--navy);transform:translateY(-1px);}
+  .founder-link:hover svg{color:#ff8a8a;}
+
+  /* ============ LEADERSHIP TEAM (Wife / Board / Pastoral) ============ */
+  .leadership-team{
+    padding:100px 0;
+    background:var(--navy-pale);
+  }
+  .lt-head{margin-bottom:54px;max-width:640px;}
+  .lt-head h2{font-size:clamp(28px,3.2vw,38px);margin-top:14px;}
+  .lt-head p{color:var(--ink-soft);font-size:15.5px;margin-top:14px;}
+
+  .lt-block{margin-bottom:64px;}
+  .lt-block:last-child{margin-bottom:0;}
+  .lt-block-head{
+    display:flex;align-items:baseline;gap:14px;margin-bottom:28px;
+    padding-bottom:14px;border-bottom:1px solid var(--line);
+  }
+  .lt-block-head h3{font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);font-weight:700;}
+  .lt-block-head .lt-count{font-size:13px;color:var(--ink-soft);}
+
+  /* First Lady spotlight - mirrors founder layout but lighter */
+  .firstlady-grid{
+    display:grid;grid-template-columns:0.7fr 1.3fr;gap:48px;align-items:center;
+    background:var(--white);border-radius:6px;padding:36px;border:1px solid var(--line);
+  }
+  .firstlady-media{
+    position:relative;border-radius:4px;overflow:hidden;aspect-ratio:1/1;
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-soft) 100%);
+  }
+  .firstlady-media img{width:100%;height:100%;object-fit:cover;}
+  .firstlady-media .fl-placeholder{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    color:rgba(255,255,255,0.5);text-align:center;padding:16px;
+  }
+  .firstlady-media .fl-placeholder span{font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;}
+  .firstlady-copy .eyebrow{margin-bottom:10px;display:block;}
+  .firstlady-copy h3{font-size:clamp(21px,2.4vw,26px);color:var(--navy);margin-bottom:12px;}
+  .firstlady-copy p{color:var(--ink-soft);font-size:15px;line-height:1.7;}
+
+  /* Board & Pastoral team grids */
+  .team-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .team-card{
+    background:var(--white);border:1px solid var(--line);border-radius:6px;
+    overflow:hidden;
+  }
+  .team-photo{
+    position:relative;aspect-ratio:1/1;
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-soft) 100%);
+  }
+  .team-photo img{width:100%;height:100%;object-fit:cover;}
+  .team-photo .tp-placeholder{
+    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    color:rgba(255,255,255,0.5);
+  }
+  .team-photo .tp-placeholder span{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;}
+  .team-info{padding:18px 20px 20px;}
+  .team-info .t-name{font-weight:700;font-size:15.5px;color:var(--navy);display:block;margin-bottom:3px;}
+  .team-info .t-role{font-size:12.5px;color:var(--red);font-weight:600;letter-spacing:0.02em;}
+
+  @media (max-width:920px){
+    .team-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:880px){
+    .firstlady-grid{grid-template-columns:1fr;gap:28px;padding:24px;}
+    .firstlady-media{aspect-ratio:16/10;}
+  }
+  @media (max-width:560px){
+    .team-grid{grid-template-columns:1fr;}
+    .lt-block-head{flex-wrap:wrap;}
   }
 
   /* ============ SERVICE TIMES ============ */
@@ -854,7 +995,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#values">Core Values</a></li>
         <li><a href="#founder">Founder</a></li>
-        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#leadership">Leadership</a></li>
         <li><a href="resources.html">Resources</a></li>
         <li><a href="#services">Service Times</a></li>
         <li><a href="school-of-ministry.html">School of Ministry</a></li>
@@ -915,7 +1056,7 @@
 
   <!-- HERO PHOTO BANNER -->
   <section class="hero-banner">
-    <img src="./images/logo.png" alt="">
+    <img src="./images/01.jpg" alt="">
     <div class="hb-placeholder">
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
       <span>Congregation Photo</span>
@@ -968,7 +1109,7 @@
   <section class="photo-break">
     <div class="photo-break-grid">
       <div class="pb-img">
-        <img src="./images/logo.png" alt="">
+        <img src="./images/51.jpeg" alt="">
         <div class="pb-placeholder">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
           <span>Worship Moment</span>
@@ -976,7 +1117,7 @@
         <div class="pb-cap">Sunday Worship</div>
       </div>
       <div class="pb-img">
-        <img src="./images/logo.png" alt="">
+        <img src="./images/49.jpeg" alt="">
         <div class="pb-placeholder">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
           <span>Word & Teaching</span>
@@ -1122,55 +1263,484 @@
       <div class="gallery-head">
         <div>
           <span class="eyebrow">Life at Prevailing Church</span>
-          <h2>Gallery</h2>
+          <h2>Our Church</h2>
         </div>
         <p>Moments from worship, outreach, and fellowship — replace these frames with your own photographs.</p>
       </div>
 
       <div class="gallery-grid">
-        <div class="g-item span-2 span-row2">
-          <img src="./images/logo.png" alt="Prevailing Church">
+        <div class="g-item">
+          <img src="./images/01.jpg" alt="Sunday Worship Service">
           <div class="g-placeholder">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Sunday Worship</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 01</span>
           </div>
           <div class="g-cap">Sunday Worship Service</div>
         </div>
         <div class="g-item">
-          <img src="./images/logo.png" alt="Prevailing Church">
+          <img src="./images/02.jpg" alt="Praise &amp; Worship">
           <div class="g-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Outreach</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 02</span>
           </div>
-          <div class="g-cap">Community Outreach</div>
+          <div class="g-cap">Praise &amp; Worship</div>
         </div>
         <div class="g-item">
-          <img src="./images/logo.png" alt="Prevailing Church">
+          <img src="./images/03.jpg" alt="Choir Ministration">
           <div class="g-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Fellowship</span>
-          </div>
-          <div class="g-cap">Fellowship Gathering</div>
-        </div>
-        <div class="g-item">
-          <img src="./images/logo.png" alt="Prevailing Church">
-          <div class="g-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Choir</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 03</span>
           </div>
           <div class="g-cap">Choir Ministration</div>
         </div>
         <div class="g-item">
-          <img src="./images/logo.png" alt="Prevailing Church">
+          <img src="./images/04.jpg" alt="Community Outreach">
           <div class="g-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span>Baptism</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 04</span>
+          </div>
+          <div class="g-cap">Community Outreach</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/05.jpg" alt="Water Baptism">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 05</span>
           </div>
           <div class="g-cap">Water Baptism</div>
         </div>
+        <div class="g-item">
+          <img src="./images/06.jpg" alt="Fellowship Gathering">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 06</span>
+          </div>
+          <div class="g-cap">Fellowship Gathering</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/07.jpg" alt="Prayer & Intercession">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 07</span>
+          </div>
+          <div class="g-cap">Prayer & Intercession</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/08.jpg" alt="Bible Study">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 08</span>
+          </div>
+          <div class="g-cap">Bible Study</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/09.jpg" alt="Youth Service">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 09</span>
+          </div>
+          <div class="g-cap">Youth Service</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/10.jpg" alt="Sunday School">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 10</span>
+          </div>
+          <div class="g-cap">Sunday School</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/11.jpg" alt="Holy Communion">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 11</span>
+          </div>
+          <div class="g-cap">Holy Communion</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/12.jpg" alt="Church Planting Visit">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 12</span>
+          </div>
+          <div class="g-cap">Church Planting Visit</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/13.jpg" alt="Leadership Training">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 13</span>
+          </div>
+          <div class="g-cap">Leadership Training</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/14.jpg" alt="Discipleship Class">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 14</span>
+          </div>
+          <div class="g-cap">Discipleship Class</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/15.jpg" alt="Special Crusade">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 15</span>
+          </div>
+          <div class="g-cap">Special Crusade</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/16.jpg" alt="Guest Ministration">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 16</span>
+          </div>
+          <div class="g-cap">Guest Ministration</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/17.jpg" alt="Children's Ministry">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 17</span>
+          </div>
+          <div class="g-cap">Children's Ministry</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/18.jpg" alt="Women's Fellowship">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 18</span>
+          </div>
+          <div class="g-cap">Women's Fellowship</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/19.jpg" alt="Men's Fellowship">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 19</span>
+          </div>
+          <div class="g-cap">Men's Fellowship</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/21.jpg" alt="Sunday Worship Service">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 21</span>
+          </div>
+          <div class="g-cap">Sunday Worship Service</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/22.jpg" alt="Praise &amp; Worship">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 22</span>
+          </div>
+          <div class="g-cap">Praise &amp; Worship</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/23.jpg" alt="Choir Ministration">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 23</span>
+          </div>
+          <div class="g-cap">Choir Ministration</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/24.jpg" alt="Community Outreach">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 24</span>
+          </div>
+          <div class="g-cap">Community Outreach</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/25.jpg" alt="Water Baptism">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 25</span>
+          </div>
+          <div class="g-cap">Water Baptism</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/26.jpg" alt="Fellowship Gathering">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 26</span>
+          </div>
+          <div class="g-cap">Fellowship Gathering</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/27.jpg" alt="Prayer & Intercession">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 27</span>
+          </div>
+          <div class="g-cap">Prayer & Intercession</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/28.jpg" alt="Bible Study">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 28</span>
+          </div>
+          <div class="g-cap">Bible Study</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/29.jpg" alt="Youth Service">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 29</span>
+          </div>
+          <div class="g-cap">Youth Service</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/30.jpg" alt="Sunday School">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 30</span>
+          </div>
+          <div class="g-cap">Sunday School</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/31.jpg" alt="Holy Communion">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 31</span>
+          </div>
+          <div class="g-cap">Holy Communion</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/32.jpeg" alt="Church Planting Visit">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 32</span>
+          </div>
+          <div class="g-cap">Church Planting Visit</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/33.jpeg" alt="Leadership Training">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 33</span>
+          </div>
+          <div class="g-cap">Leadership Training</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/34.jpeg" alt="Discipleship Class">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 34</span>
+          </div>
+          <div class="g-cap">Discipleship Class</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/35.jpeg" alt="Special Crusade">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 35</span>
+          </div>
+          <div class="g-cap">Special Crusade</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/36.jpeg" alt="Guest Ministration">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 36</span>
+          </div>
+          <div class="g-cap">Guest Ministration</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/37.jpeg" alt="Children's Ministry">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 37</span>
+          </div>
+          <div class="g-cap">Children's Ministry</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/38.jpeg" alt="Women's Fellowship">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 38</span>
+          </div>
+          <div class="g-cap">Women's Fellowship</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/39.jpeg" alt="Men's Fellowship">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 39</span>
+          </div>
+          <div class="g-cap">Men's Fellowship</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/40.jpeg" alt="Music Ministry">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 40</span>
+          </div>
+          <div class="g-cap">Music Ministry</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/41.jpeg" alt="Sunday Worship Service">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 41</span>
+          </div>
+          <div class="g-cap">Sunday Worship Service</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/42.jpeg" alt="Praise &amp; Worship">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 42</span>
+          </div>
+          <div class="g-cap">Praise &amp; Worship</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/43.jpeg" alt="Choir Ministration">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 43</span>
+          </div>
+          <div class="g-cap">Choir Ministration</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/44.jpeg" alt="Community Outreach">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 44</span>
+          </div>
+          <div class="g-cap">Community Outreach</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/45.jpeg" alt="Water Baptism">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 45</span>
+          </div>
+          <div class="g-cap">Water Baptism</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/46.jpeg" alt="Fellowship Gathering">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 46</span>
+          </div>
+          <div class="g-cap">Fellowship Gathering</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/47.jpeg" alt="Prayer & Intercession">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 47</span>
+          </div>
+          <div class="g-cap">Prayer & Intercession</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/48.jpeg" alt="Bible Study">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 48</span>
+          </div>
+          <div class="g-cap">Bible Study</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/49.jpeg" alt="Youth Service">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 49</span>
+          </div>
+          <div class="g-cap">Youth Service</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/50.jpg" alt="Sunday School">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 50</span>
+          </div>
+          <div class="g-cap">Sunday School</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/51.jpeg" alt="Holy Communion">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 51</span>
+          </div>
+          <div class="g-cap">Holy Communion</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/52.jpeg" alt="Church Planting Visit">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 52</span>
+          </div>
+          <div class="g-cap">Church Planting Visit</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/53.jpeg" alt="Leadership Training">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 53</span>
+          </div>
+          <div class="g-cap">Leadership Training</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/54.jpeg" alt="Discipleship Class">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 54</span>
+          </div>
+          <div class="g-cap">Discipleship Class</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/55.jpeg" alt="Special Crusade">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 55</span>
+          </div>
+          <div class="g-cap">Special Crusade</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/56.jpeg" alt="Guest Ministration">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 56</span>
+          </div>
+          <div class="g-cap">Guest Ministration</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/57.jpeg" alt="Children's Ministry">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 57</span>
+          </div>
+          <div class="g-cap">Children's Ministry</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/58.jpeg" alt="Women's Fellowship">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 58</span>
+          </div>
+          <div class="g-cap">Women's Fellowship</div>
+        </div>
+        <div class="g-item">
+          <img src="./images/59.jpeg" alt="Men's Fellowship">
+          <div class="g-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Photo 59</span>
+          </div>
+          <div class="g-cap">Men's Fellowship</div>
+        </div>
+
       </div>
 
-      <p class="gallery-note">Photo frames shown above are placeholders. Send through your event photos and we'll drop them in at full resolution.</p>
+      <div class="gallery-more">
+        <button id="galleryMoreBtn" type="button">Show More Photos</button>
+      </div>
+
+      <p class="gallery-note">Photo frames shown above are placeholders (60 slots, ./images/gallery/01.jpg – 60.jpg). Drop in your event photos at full resolution and they'll appear automatically — click any photo to view it full-size.</p>
     </div>
   </section>
 
@@ -1217,6 +1787,155 @@
           <div class="motto-block">
             <span class="m-label">Personal Motto</span>
             <p>"Preaching the Legacy of Christ In-deep Affliction and Solidarity for Christ!"</p>
+          </div>
+
+          <div class="founder-links">
+            <a class="founder-link" href="http://www.youtube.com/@BishopMamet" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.6 31.6 0 000 12a31.6 31.6 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.6 31.6 0 0024 12a31.6 31.6 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>
+              YouTube &mdash; Rev. Josphat Mamet
+            </a>
+            <a class="founder-link" href="https://www.facebook.com/rev.mamet" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0022 12z"/></svg>
+              Facebook &mdash; Josphat Mamet
+            </a>
+            <a class="founder-link" href="mailto:josphatmamet@gmail.com">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+              josphatmamet@gmail.com
+            </a>
+            <a class="founder-link" href="mailto:prevailingchurchkenya@gmail.com">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+              prevailingchurchkenya@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP TEAM (First Lady / Board / Pastoral) -->
+  <section class="leadership-team" id="leadership">
+    <div class="wrap">
+      <div class="lt-head">
+        <span class="eyebrow">Our Leadership</span>
+        <h2>The Team Behind the Ministry</h2>
+        <p>From the Bishop's household to the Board and our Pastoral team, Prevailing Church – Kenya is shepherded by leaders devoted to the Gospel and to the people they serve.</p>
+      </div>
+
+      <!-- First Lady -->
+      <div class="lt-block">
+        <div class="lt-block-head">
+          <h3>The Bishop's Wife</h3>
+        </div>
+        <div class="firstlady-grid">
+          <div class="firstlady-media">
+            <img src="" alt="The Bishop's Wife">
+            <div class="fl-placeholder">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+              <span>Portrait Photo</span>
+            </div>
+          </div>
+          <div class="firstlady-copy">
+            <span class="eyebrow">Bishops wife, Prevailing Church &ndash; Kenya</span>
+            <h3>[Bishops wife Full Name]</h3>
+            <p>A devoted partner in ministry, standing alongside Bishop Dr. Josphat Mamet in prayer, pastoral care, and the spiritual nurture of the congregation. </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Board -->
+      <div class="lt-block">
+        <div class="lt-block-head">
+          <h3>The Board</h3>
+          <span class="lt-count">Governance &amp; Oversight</span>
+        </div>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-photo">
+              <img src="" alt="Board Member">
+              <div class="tp-placeholder">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+                <span>Photo</span>
+              </div>
+            </div>
+            <div class="team-info">
+              <span class="t-name">[Board Member Name]</span>
+              <span class="t-role">Board Chair</span>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-photo">
+              <img src="" alt="Board Member">
+              <div class="tp-placeholder">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+                <span>Photo</span>
+              </div>
+            </div>
+            <div class="team-info">
+              <span class="t-name">[Board Member Name]</span>
+              <span class="t-role">Board Secretary</span>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-photo">
+              <img src="" alt="Board Member">
+              <div class="tp-placeholder">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+                <span>Photo</span>
+              </div>
+            </div>
+            <div class="team-info">
+              <span class="t-name">[Board Member Name]</span>
+              <span class="t-role">Board Treasurer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pastoral -->
+      <div class="lt-block">
+        <div class="lt-block-head">
+          <h3>Pastoral Team</h3>
+          <span class="lt-count">Shepherding the Congregation</span>
+        </div>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-photo">
+              <img src="" alt="Pastor">
+              <div class="tp-placeholder">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+                <span>Photo</span>
+              </div>
+            </div>
+            <div class="team-info">
+              <span class="t-name">[Pastor Name]</span>
+              <span class="t-role">Associate Pastor</span>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-photo">
+              <img src="" alt="Pastor">
+              <div class="tp-placeholder">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+                <span>Photo</span>
+              </div>
+            </div>
+            <div class="team-info">
+              <span class="t-name">[Pastor Name]</span>
+              <span class="t-role">Associate Pastor</span>
+            </div>
+          </div>
+          <div class="team-card">
+            <div class="team-photo">
+              <img src="" alt="Pastor">
+              <div class="tp-placeholder">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+                <span>Photo</span>
+              </div>
+            </div>
+            <div class="team-info">
+              <span class="t-name">[Pastor Name]</span>
+              <span class="t-role">Youth Pastor</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1333,6 +2052,7 @@
         <div class="fb-links">
           <a href="#about">About</a>
           <a href="#pillars">Foundations</a>
+          <a href="#leadership">Leadership</a>
           <a href="#gallery">Gallery</a>
            <a href="resources.html">Resources</a>
           <a href="#contact">Contact</a>
@@ -1364,17 +2084,105 @@
   // Generic image/placeholder toggler:
   // Any <img> with an empty src stays hidden and its sibling placeholder/frame-label shows instead.
   // Once a real src is set (file path or base64 string), the image shows and the placeholder hides automatically.
+  // If a src is set but the file doesn't actually exist yet (e.g. gallery placeholders), the placeholder is restored on error.
   (function setupImages(){
-    const placeholderClasses = ['hb-placeholder','pb-placeholder','g-placeholder','fm-placeholder','sm-placeholder','frame-label','logo-mark'];
-    document.querySelectorAll('img').forEach(img => {
-      const hasSrc = !!img.getAttribute('src');
-      img.style.display = hasSrc ? 'block' : 'none';
+    const placeholderClasses = ['hb-placeholder','pb-placeholder','g-placeholder','fm-placeholder','sm-placeholder','fl-placeholder','tp-placeholder','frame-label','logo-mark'];
+    function showPlaceholder(img, show){
+      img.style.display = show ? 'none' : 'block';
       const parent = img.parentElement;
       if (!parent) return;
       placeholderClasses.forEach(cls => {
         const ph = parent.querySelector('.' + cls);
-        if (ph) ph.style.display = hasSrc ? 'none' : (cls === 'logo-mark' ? 'flex' : '');
+        if (ph) ph.style.display = show ? (cls === 'logo-mark' ? 'flex' : '') : 'none';
       });
+    }
+    document.querySelectorAll('img').forEach(img => {
+      const hasSrc = !!img.getAttribute('src');
+      if (!hasSrc){
+        showPlaceholder(img, true);
+        return;
+      }
+      // Optimistically show the image; fall back to placeholder if it 404s.
+      showPlaceholder(img, false);
+      img.addEventListener('error', () => showPlaceholder(img, true), { once: true });
+    });
+  })();
+
+  // Gallery: "Show More" reveal + lightbox viewer
+  (function setupGallery(){
+    const grid = document.querySelector('.gallery-grid');
+    if (!grid) return;
+    const items = Array.from(grid.querySelectorAll('.g-item'));
+    const moreBtn = document.getElementById('galleryMoreBtn');
+    const INITIAL_COUNT = 20;
+
+    if (moreBtn && items.length > INITIAL_COUNT) {
+      items.forEach((item, i) => { if (i >= INITIAL_COUNT) item.style.display = 'none'; });
+      moreBtn.addEventListener('click', () => {
+        items.forEach(item => { item.style.display = ''; });
+        moreBtn.setAttribute('hidden', '');
+      });
+    } else if (moreBtn) {
+      moreBtn.setAttribute('hidden', '');
+    }
+
+    // Lightbox
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.innerHTML = `
+      <button class="lightbox-close" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <button class="lightbox-prev" aria-label="Previous">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="lightbox-next" aria-label="Next">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <div class="lightbox-stage">
+        <img alt="">
+        <div class="lightbox-cap"></div>
+      </div>
+      <div class="lightbox-counter"></div>
+    `;
+    document.body.appendChild(lb);
+
+    const lbImg = lb.querySelector('.lightbox-stage img');
+    const lbCap = lb.querySelector('.lightbox-cap');
+    const lbCounter = lb.querySelector('.lightbox-counter');
+    let currentIndex = 0;
+
+    function openAt(index){
+      currentIndex = index;
+      const item = items[currentIndex];
+      const img = item.querySelector('img');
+      const cap = item.querySelector('.g-cap');
+      lbImg.src = img.getAttribute('src') || '';
+      lbImg.alt = img.getAttribute('alt') || '';
+      lbCap.textContent = cap ? cap.textContent : '';
+      lbCounter.textContent = (currentIndex + 1) + ' / ' + items.length;
+      lb.classList.add('open');
+    }
+    function close(){ lb.classList.remove('open'); }
+    function step(delta){
+      let next = currentIndex + delta;
+      if (next < 0) next = items.length - 1;
+      if (next >= items.length) next = 0;
+      openAt(next);
+    }
+
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => openAt(i));
+    });
+    lb.querySelector('.lightbox-close').addEventListener('click', close);
+    lb.querySelector('.lightbox-prev').addEventListener('click', () => step(-1));
+    lb.querySelector('.lightbox-next').addEventListener('click', () => step(1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
     });
   })();
 </script>
