@@ -30,6 +30,8 @@
     background:var(--white);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    width: 100%;
+    overflow-x: hidden;
   }
 
   h1,h2,h3,.display{
@@ -62,11 +64,16 @@
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
-  .nav-row{
-    display:flex;align-items:center;justify-content:space-between;
+.nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    max-width:var(--max);
+    margin:0 auto;
     padding:14px 28px;
-    max-width:var(--max);margin:0 auto;
-  }
+    box-sizing:border-box;
+}
   .brand{display:flex;align-items:center;gap:12px;}
   .logo-slot{
     width:48px;height:48px;border-radius:50%;
@@ -549,6 +556,13 @@
   @media (max-width:1000px){
     .gallery-grid{grid-template-columns:repeat(4,1fr);}
   }
+  @media (max-width:880px){
+    .hero-inner{
+        width:100%;
+        padding:40px 20px 60px;
+        box-sizing:border-box;
+    }
+}
   @media (max-width:760px){
     .gallery-grid{grid-template-columns:repeat(3,1fr);gap:8px;}
   }
@@ -971,6 +985,19 @@
 .resources-btn:active{
     transform:translateY(0);
 }
+@media (max-width:768px){
+
+    .wrap,
+    .hero-inner,
+    .nav-row,
+    .photo-break-grid,
+    .hero-banner .hb-caption,
+    .school-ministry{
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+}
 </style>
 </head>
 <body>
@@ -1221,7 +1248,7 @@
         <div class="about-copy">
           <span class="eyebrow">Who We Are</span>
           <h2>A church built to reach, not just to gather.</h2>
-          <p>Prevailing Church in Eldoret is committed to advancing the Kingdom of God with urgency — standing on the Word, reaching beyond our walls, and nourishing believers in spirit and in body.</p>
+          <p>Prevailing Church _ Kenya is committed to advancing the Kingdom of God with urgency — standing on the Word, reaching beyond our walls, and nourishing believers in spirit and in body.</p>
 
           <div class="vm-list">
             <div class="vm-item">
@@ -1828,7 +1855,7 @@
         </div>
         <div class="firstlady-grid">
           <div class="firstlady-media">
-            <img src="" alt="The Bishop's Wife">
+            <img src="./images/wife.jpeg" alt="The Bishop's Wife">
             <div class="fl-placeholder">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
               <span>Portrait Photo</span>
@@ -1836,8 +1863,19 @@
           </div>
           <div class="firstlady-copy">
             <span class="eyebrow">Bishops wife, Prevailing Church &ndash; Kenya</span>
-            <h3>[Bishops wife Full Name]</h3>
-            <p>A devoted partner in ministry, standing alongside Bishop Dr. Josphat Mamet in prayer, pastoral care, and the spiritual nurture of the congregation. </p>
+            <h3>Rev. Valence Mamet</h3>
+            <p>
+Rev. Valence Mamet is a passionate preacher of the Gospel, an inspiring teacher, and a compassionate shepherd whose life is devoted to seeing people transformed by the power of Jesus Christ. She serves as the Senior Pastor of Prevailing Church – Kenya, Rehoboth Congregation in Naiberi - Eldoret, where she faithfully leads the church in worship, discipleship, prayer, pastoral care, and community outreach.
+
+With a unique blend of ministry and professional education, Rev. Valence has dedicated her life to nurturing both the spiritual and personal growth of individuals. As a professional teacher, she has spent many years shaping young minds while faithfully serving the Body of Christ. Her passion for teaching extends beyond the classroom into the church, where she is committed to equipping believers with biblical truth and practical Christian living.
+
+Known for her warm heart, wisdom, and servant leadership, Rev. Valence has a special burden for families, women, children, and the next generation. Her ministry is marked by compassionate pastoral care, fervent prayer, sound biblical teaching, and a desire to see every believer discover their God-given purpose and grow into spiritual maturity.
+
+Together with her husband, Bishop Dr. Josphat Mamet, the Presiding Bishop of Prevailing Church – Kenya, she is helping "Advancing the Legacy of Christ Today." Their shared mission is to proclaim the Gospel of the Kingdom, plant Christ-centered churches, raise godly leaders, and transform communities through the life-changing message of Jesus Christ.
+
+Rev. Valence believes that every person has a divine purpose and that the Church is called to be a place where faith is strengthened, lives are restored, and destinies are shaped. Through her ministry, she continues to inspire people to know Christ deeply, walk faithfully with Him, and make His love known to the world.
+
+> "My greatest joy is to see people encounter Christ, grow in His Word, and become faithful ambassadors of His Kingdom." </p>
           </div>
         </div>
       </div>
@@ -1891,7 +1929,7 @@
         </div>
       </div>
 
-      <!-- Pastoral -->
+      <!-- Pastoral 
       <div class="lt-block">
         <div class="lt-block-head">
           <h3>Pastoral Team</h3>
@@ -1940,7 +1978,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- SERVICE TIMES -->
   <section class="services" id="services">
@@ -1977,6 +2015,12 @@
             <div class="day">Friday</div>
             <h3>Prayer & Intercession</h3>
             <div class="time">8:00 PM - 11:00 PM</div>
+            <p>Corporate prayer for the church, our nation, and the nations.</p>
+          </div>
+             <div class="service-card">
+            <div class="day">Saturday</div>
+            <h3>Praise Service</h3>
+            <div class="time">4:00 PM - 6:00 PM</div>
             <p>Corporate prayer for the church, our nation, and the nations.</p>
           </div>
         </div>
