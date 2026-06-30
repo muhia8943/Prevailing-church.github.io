@@ -22,7 +22,7 @@
 
   *{margin:0;padding:0;box-sizing:border-box;}
 
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%;}
 
   body{
     font-family:var(--font);
@@ -30,8 +30,9 @@
     background:var(--white);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
-    width: 100%;
-    overflow-x: hidden;
+    overflow-x:hidden;
+    max-width:100%;
+    overflow-wrap:break-word;
   }
 
   h1,h2,h3,.display{
@@ -690,6 +691,7 @@
     background:var(--navy-pale);border:1px solid var(--line);
     font-size:13.5px;font-weight:600;color:var(--navy);
     transition:background .2s ease,border-color .2s ease,transform .2s ease;
+    max-width:100%;overflow-wrap:break-word;word-break:break-word;
   }
   .founder-link svg{flex-shrink:0;color:var(--red);}
   .founder-link:hover{background:var(--navy);color:var(--white);border-color:var(--navy);transform:translateY(-1px);}
@@ -1880,7 +1882,62 @@ Rev. Valence believes that every person has a divine purpose and that the Church
         </div>
       </div>
 
-      <!-- Board -->
+            <div class="lt-block">
+        <div class="lt-block-head">
+          <h3> Secretary General </h3>
+        </div>
+        <div class="firstlady-grid">
+          <div class="firstlady-media">
+            <img src="./images/pastor1.jpeg" alt="The Bishop's Wife">
+            <div class="fl-placeholder">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+              <span>Portrait Photo</span>
+            </div>
+          </div>
+          <div class="firstlady-copy">
+            <span class="eyebrow"> Secretary General (SG) of Prevailing Church</span>
+            <h3>Rev. Paul Kimaiywa, SG</h3>
+            <p>
+Rev. Paul Kimaiywa serves as the Secretary General (SG) of Prevailing Church – Kenya, where he provides faithful administrative and spiritual leadership in advancing the vision and mission of the ministry. Renowned for his integrity, diligence, and servant-hearted leadership, he has become a dependable pillar within the church, helping to strengthen its governance, organization, and growth.
+
+He also serves as the Regional Overseer for Baringo Region, offering pastoral oversight, mentoring ministers, nurturing congregations, and fostering unity among churches under his care. His unwavering commitment to biblical leadership and Kingdom advancement has significantly contributed to the expansion and strengthening of the ministry in the region.
+
+A devoted family man, Rev. Kimaiywa is happily married to Pastor Veronica Kimaiywa, and together they are blessed with children. Their home reflects a shared commitment to Christ, ministry, and raising a godly family that exemplifies Christian values.
+
+Guided by humility, prayer, and a passion for discipleship, Rev. Paul Kimaiywa continues to serve faithfully alongside the Founder and Presiding Bishop, making a lasting impact through his leadership, wisdom, and unwavering dedication to the work of God. </p>
+          </div>
+        </div>
+      </div>
+
+            <div class="lt-block">
+        <div class="lt-block-head">
+          <h3> Acting Deputy SG</h3>
+        </div>
+        <div class="firstlady-grid">
+          <div class="firstlady-media">
+            <img src="./images/pastor2.jpeg" alt="The Bishop's Wife">
+            <div class="fl-placeholder">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
+              <span>Portrait Photo</span>
+            </div>
+          </div>
+          <div class="firstlady-copy">
+            <span class="eyebrow"> Acting Deputy SG, Prevailing Church &ndash; Kenya</span>
+            <h3>Pastor Gilbert Rono</h3>
+            <p>
+Pastor Gilbert Rono, Acting Deputy SG.
+Pastor Rono is a humble and devoted servant of God, faithfully serving as the Acting Deputy Secretary General of Prevailing Church – Kenya and the Associate Pastor at Rehoboth Congregation, Naiberi. His life reflects a deep love for Christ, unwavering faithfulness, and a genuine passion for seeing lives transformed by the power of the Gospel.
+
+With a servant's heart and a steadfast commitment to God's calling, Pastor Gilbert ministers with wisdom, compassion, and integrity. He is passionate about preaching the uncompromised Word of God, discipling believers, mentoring emerging leaders, and strengthening the Church to fulfill its divine mandate.
+
+A dependable pillar in the ministry, Pastor Gilbert exemplifies Christ-like humility and excellence in service. Through his dedication, he continues to inspire hope, encourage spiritual growth, and empower God's people to walk boldly in their God-given purpose, advancing the Kingdom of God one life at a time. </p>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Board 
       <div class="lt-block">
         <div class="lt-block-head">
           <h3>The Board</h3>
@@ -1978,9 +2035,9 @@ Rev. Valence believes that every person has a divine purpose and that the Church
         </div>
       </div>
     </div>
-  </section> -->
+  </section> --> 
 
-  <!-- SERVICE TIMES -->
+  <!-- SERVICE TIMES --> 
   <section class="services" id="services">
     <div class="wrap">
       <div class="pillars-head">
@@ -2003,7 +2060,7 @@ Rev. Valence believes that every person has a divine purpose and that the Church
             <div class="day">Sunday</div>
             <h3>Sunday School Service</h3>
             <div class="time">8:00 AM - 9:00 AM</div>
-            <p>Worship, the Word, and Holy Communion on first Sundays.</p>
+            <p>Worship and the Word for the young.</p>
           </div>
           <div class="service-card">
             <div class="day">Sunday</div>
@@ -2021,7 +2078,7 @@ Rev. Valence believes that every person has a divine purpose and that the Church
             <div class="day">Saturday</div>
             <h3>Praise Service</h3>
             <div class="time">4:00 PM - 6:00 PM</div>
-            <p>Corporate prayer for the church, our nation, and the nations.</p>
+            <p>Join us for a time of worship and praise.</p>
           </div>
         </div>
       </div>
@@ -2080,7 +2137,7 @@ Rev. Valence believes that every person has a divine purpose and that the Church
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             <div>
               <div class="label">Service Days</div>
-              <div class="val">Sunday &middot; Wednesday &middot; Friday</div>
+              <div class="val">Sunday &middot; Wednesday &middot; Friday &middot; Saturday</div>
             </div>
           </div>
         </div>
