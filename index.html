@@ -907,6 +907,50 @@
     outline:2px solid var(--red);
     outline-offset:2px;
   }
+  /* ============ SCROLL REVEAL ANIMATIONS ============ */
+  /* These classes are only ever applied by JavaScript (see bottom of page),
+     so if a browser has JS disabled everything simply stays at full opacity —
+     nothing on the page can end up permanently hidden. */
+  .reveal-up,
+  .reveal-fade,
+  .reveal-img{
+    transition:opacity .8s cubic-bezier(.16,.84,.44,1), transform .8s cubic-bezier(.16,.84,.44,1);
+  }
+  .reveal-up{ opacity:0; transform:translateY(34px); }
+  .reveal-fade{ opacity:0; }
+  .reveal-img{ opacity:0; transform:translateY(24px) scale(.97); }
+
+  .reveal-up.is-visible,
+  .reveal-fade.is-visible,
+  .reveal-img.is-visible{
+    opacity:1; transform:none;
+  }
+
+  /* Gentle "pop" on hover for photographs — layered on top of existing overlays/effects */
+  .g-item img,
+  .pb-img img,
+  .about-media img,
+  .founder-media img,
+  .firstlady-media img,
+  .team-photo img,
+  .services-media img,
+  .hero-banner img{
+    transition:transform .5s cubic-bezier(.2,.8,.3,1);
+  }
+  .g-item:hover img,
+  .pb-img:hover img,
+  .about-media:hover img,
+  .founder-media:hover img,
+  .firstlady-media:hover img,
+  .team-photo:hover img,
+  .services-media:hover img{
+    transform:scale(1.06);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal-up, .reveal-fade, .reveal-img{ opacity:1!important; transform:none!important; }
+  }
+
   .school-ministry{
     max-width: var(--max);
     margin: 0 auto 80px;
@@ -2244,6 +2288,51 @@ A dependable pillar in the ministry, Pastor Gilbert exemplifies Christ-like humi
       if (e.key === 'Escape') close();
       if (e.key === 'ArrowLeft') step(-1);
       if (e.key === 'ArrowRight') step(1);
+    });
+  })();
+
+  // Scroll-reveal: photos and section content fade/slide into view as the
+  // page is scrolled, with items in the same row/grid cascading in one
+  // after another rather than all popping in at once. Purely additive —
+  // classes are assigned here in JS, so if this ever fails to run, every
+  // element simply stays at its normal, fully visible state.
+  (function setupScrollReveal(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const groups = [
+      // Section intros / copy blocks — gentle fade + rise
+      { selector: '.welcome-inner, .pillars-head, .gallery-head, .lt-head, .contact-copy, .contact-details, .founder-copy, .about-copy, .theme-inner, .resources-cta, .som-content, .declaration .wrap',
+        type: 'reveal-up', stagger: 90 },
+      // Repeating cards / rows — cascade one after another
+      { selector: '.value-card, .scripture-card, .service-card, .team-card, .vm-item, .pillar-row',
+        type: 'reveal-up', stagger: 70 },
+      // Photographs — fade + slight rise + scale, so they feel like they're "popping up"
+      { selector: '.hero-banner, .pb-img, .about-media, .founder-media, .firstlady-media, .team-photo, .services-media, .g-item',
+        type: 'reveal-img', stagger: 60 }
+    ];
+
+    const supportsIO = 'IntersectionObserver' in window;
+    const observer = supportsIO ? new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }) : null;
+
+    groups.forEach(group => {
+      const els = Array.from(document.querySelectorAll(group.selector));
+      const counters = new Map(); // stagger index per shared parent (per grid/row)
+      els.forEach(el => {
+        const parent = el.parentElement;
+        const count = counters.get(parent) || 0;
+        counters.set(parent, count + 1);
+        el.classList.add(group.type);
+        el.style.transitionDelay = Math.min(count * group.stagger, 480) + 'ms';
+        if (observer) observer.observe(el);
+        else el.classList.add('is-visible');
+      });
     });
   })();
 </script>
