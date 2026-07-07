@@ -782,6 +782,46 @@
     .contact{padding:70px 0 0;}
   }
 
+  /* ================= SCROLL REVEAL ANIMATIONS ================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(45px);
+  transition:
+    opacity .8s ease,
+    transform .8s cubic-bezier(.2,.65,.2,1);
+  will-change:opacity,transform;
+}
+
+.reveal.reveal-left{
+  transform:translateX(-50px);
+}
+
+.reveal.reveal-right{
+  transform:translateX(50px);
+}
+
+.reveal.reveal-scale{
+  transform:scale(.95);
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+.reveal-delay-4{transition-delay:.4s;}
+
+@media (prefers-reduced-motion:reduce){
+  .reveal{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+}
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
@@ -905,6 +945,8 @@
   }
   .res-channel-cta h3{color:var(--white);font-size:18px;margin-bottom:6px;}
   .res-channel-cta p{color:rgba(255,255,255,0.7);font-size:14px;}
+
+
 </style>
 </head>
 <body>
@@ -914,7 +956,6 @@
     <a href="index.html" class="brand">
             <div class="logo-slot" id="logoSlot">
         <img id="logoImg" src="./images/logo.png" alt="Prevailing Church logo">
-        <span class="logo-mark" id="logoMark">PC</span>
       </div>
       <div class="brand-text">
         <span class="name">Prevailing Church</span>
@@ -1228,34 +1269,71 @@
 </section>
 
 <script>
-  const menuBtn = document.getElementById('menuBtn');
-  const navList = document.getElementById('navList');
-  menuBtn.addEventListener('click', () => {
-    const open = navList.classList.toggle('open');
-    menuBtn.setAttribute('aria-expanded', open);
-  });
-  navList.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      navList.classList.remove('open');
-      menuBtn.setAttribute('aria-expanded', 'false');
-    });
-  });
+   const menuBtn=document.getElementById("menuBtn");
+    const navList=document.getElementById("navList");
 
-  document.getElementById('year').textContent = new Date().getFullYear();
+    if(menuBtn && navList){
 
-  (function setupImages(){
-    const placeholderClasses = ['hb-placeholder','pb-placeholder','g-placeholder','fm-placeholder','sm-placeholder','frame-label','logo-mark','rc-placeholder'];
-    document.querySelectorAll('img').forEach(img => {
-      const hasSrc = !!img.getAttribute('src');
-      img.style.display = hasSrc ? 'block' : 'none';
-      const parent = img.parentElement;
-      if (!parent) return;
-      placeholderClasses.forEach(cls => {
-        const ph = parent.querySelector('.' + cls);
-        if (ph) ph.style.display = hasSrc ? 'none' : (cls === 'logo-mark' ? 'flex' : '');
-      });
-    });
-  })();
+        menuBtn.addEventListener("click",()=>{
+
+            const open=navList.classList.toggle("open");
+
+            menuBtn.setAttribute("aria-expanded",open);
+
+        });
+
+        navList.querySelectorAll("a").forEach(link=>{
+
+            link.addEventListener("click",()=>{
+
+                navList.classList.remove("open");
+
+                menuBtn.setAttribute("aria-expanded","false");
+
+            });
+
+        });
+
+    }
+
+const revealElements = document.querySelectorAll(`
+  .res-section-head,
+  .res-card,
+  .res-list-item,
+  .res-channel-cta,
+  .gallery-note
+`);
+
+revealElements.forEach((el, index) => {
+  el.classList.add("reveal");
+
+  if (el.classList.contains("res-card")) {
+    el.classList.add("reveal-scale");
+    el.classList.add(`reveal-delay-${(index % 3) + 1}`);
+  }
+
+  if (el.classList.contains("res-section-head")) {
+    el.classList.add("reveal-left");
+  }
+
+  if (el.classList.contains("res-channel-cta")) {
+    el.classList.add("reveal-right");
+  }
+});
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+},{
+  threshold:0.15,
+  rootMargin:"0px 0px -60px 0px"
+});
+
+revealElements.forEach(el=>observer.observe(el));
 </script>
 
 </body>
