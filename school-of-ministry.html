@@ -33,15 +33,17 @@
 
   *{margin:0;padding:0;box-sizing:border-box;}
 
-  html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
 
-  body{
-    font-family:var(--font);
-    color:var(--ink);
-    background:var(--white);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
+body{
+  font-family:var(--font);
+  color:var(--ink);
+  background:var(--white);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  width:100%;
+}
 
   h1,h2,h3,.display{
     font-family:var(--font);
@@ -713,7 +715,7 @@
   }
 
   /* ============ RESPONSIVE NAV ============ */
-  @media (max-width:880px){
+@media (max-width:880px){
     nav ul{
       position:fixed;top:73px;left:0;right:0;
       flex-direction:column;align-items:flex-start;gap:0;
@@ -728,10 +730,11 @@
     nav a{display:block;padding:16px 28px;width:100%;border-bottom:1px solid var(--line);}
     nav a::after{display:none;}
     .nav-cta{margin:14px 28px;display:inline-block;}
-    .menu-btn{display:flex;}
+    .menu-btn{display:flex; margin-left:auto; order:3;}
+    nav{order:2;}
+    .brand{order:1;}
     .hero-inner{grid-template-columns:1fr;gap:40px;}
   }
-
   @media (max-width:600px){
     .scripture-grid{gap:30px;}
     .pillars{padding:70px 0 80px;}
@@ -877,14 +880,10 @@
     </button>
     <nav>
       <ul id="navList">
+        <li><a href="index.html#about">Home</a></li>
         <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#pillars">Our Foundations</a></li>
-        <li><a href="index.html#values">Core Values</a></li>
-        <li><a href="index.html#founder">Founder</a></li>
-        <li><a href="index.html#gallery">Gallery</a></li>
-        <li><a href="index.html#services">Service Times</a></li>
         <li><a href="school-of-ministry.html">School of Ministry</a></li>
-        <li><a href="index.html#contact" class="nav-cta">Visit Us</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
       </ul>
     </nav>
   </div>

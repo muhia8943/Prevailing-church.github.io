@@ -141,7 +141,7 @@
       linear-gradient(180deg, var(--navy) 0%, #062453 62%, #0c2c5e 100%);
     color:var(--white);
     overflow:hidden;
-    padding:88px 0 0;
+    padding:0px 0 0;
   }
   .hero::before{
     content:'';
@@ -153,18 +153,18 @@
   }
   .hero-inner{
     position:relative;z-index:2;
-    max-width:var(--max);margin:0 auto;padding:64px 28px 90px;
-    display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:end;
+    max-width:var(--max);margin:0 auto;padding:30px 28px 70px;
+    display:grid;grid-template-columns:1.15fr 0.85fr;gap:20px;align-items:end;
   }
   .hero-eyebrow{
-    font-size:12.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+    font-size:30px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
     color:#ff8a8a;margin-bottom:22px;display:flex;align-items:center;gap:10px;
   }
   .hero-eyebrow .dash{width:28px;height:1.5px;background:#ff8a8a;display:inline-block;}
-  .hero h1{
+  .hero h2{
     color:var(--white);
-    font-size:clamp(40px, 5.6vw, 68px);
-    font-weight:600;
+    font-size:clamp(30px, 5.6vw, 58px);
+    font-weight:500;
     margin-bottom:22px;
   }
   .hero h1 em{
@@ -174,7 +174,7 @@
     font-size:18px;color:rgba(255,255,255,0.78);
     max-width:480px;margin-bottom:34px;font-weight:400;
   }
-  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .hero-actions{display:flex;gap:74px;flex-wrap:wrap;}
   .btn{
     display:inline-flex;align-items:center;gap:8px;
     padding:14px 26px;border-radius:3px;
@@ -870,7 +870,7 @@
   }
 
   /* ============ RESPONSIVE NAV ============ */
-  @media (max-width:880px){
+@media (max-width:880px){
     nav ul{
       position:fixed;top:73px;left:0;right:0;
       flex-direction:column;align-items:flex-start;gap:0;
@@ -885,7 +885,9 @@
     nav a{display:block;padding:16px 28px;width:100%;border-bottom:1px solid var(--line);}
     nav a::after{display:none;}
     .nav-cta{margin:14px 28px;display:inline-block;}
-    .menu-btn{display:flex;}
+    .menu-btn{display:flex; margin-left:auto; order:3;}
+    nav{order:2;}
+    .brand{order:1;}
     .hero-inner{grid-template-columns:1fr;gap:40px;}
   }
 
@@ -1095,8 +1097,8 @@
   <section class="hero">
     <div class="hero-inner">
       <div>
-        <div class="hero-eyebrow"><span class="dash"></span>Kenya</div>
-        <h1>Advancing the Legacy<br>of <em>Christ</em> Today.</h1>
+        <div class="hero-eyebrow">PREVAILING CHURCH - KENYA</div>
+        <h2>'Advancing the Legacy of Christ Today.'</h2>
         <p class="lead">Prevailing Church – Kenya is a Christ-centered ministry committed to advancing the Kingdom of God through the preaching of the Gospel, discipleship, prayer, worship, and compassionate service.</p>
         <div class="hero-actions">
           <a href="#services" class="btn btn-primary">Join a Service</a>
@@ -2133,8 +2135,13 @@ A dependable pillar in the ministry, Pastor Gilbert exemplifies Christ-like humi
               <div class="label">Phone</div>
               <a class="val" href="tel:+254720805903">+254 720-805 903</a>
             </div>
-            <div class="label">
-              <a href="mailto:info@prevailingchurch.co.ke">info@prevailingchurch.co.ke</a>
+            
+          </div>
+          <div class="cdet">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <div class="label">Email</div>
+              <a class="val" href="mailto:info@prevailingchurch.co.ke">info@prevailingchurch.co.ke</a>
             </div>
           </div>
           <div class="cdet">
@@ -2156,9 +2163,7 @@ A dependable pillar in the ministry, Pastor Gilbert exemplifies Christ-like humi
         </div>
         <div class="fb-links">
           <a href="#about">About</a>
-          <a href="#pillars">Foundations</a>
-          <a href="#leadership">Leadership</a>
-          <a href="#gallery">Gallery</a>
+          <a href="school-of-ministry.html">School-of-ministry</a>
            <a href="resources.html">Resources</a>
           <a href="#contact">Contact</a>
         </div>
