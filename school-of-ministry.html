@@ -135,7 +135,7 @@ body{
       linear-gradient(180deg, var(--navy) 0%, #062453 62%, #0c2c5e 100%);
     color:var(--white);
     overflow:hidden;
-    padding:88px 0 0;
+    padding:30px 0 0;
   }
   .hero::before{
     content:'';
@@ -157,12 +157,9 @@ body{
   .hero-eyebrow .dash{width:28px;height:1.5px;background:#ff8a8a;display:inline-block;}
   .hero h1{
     color:var(--white);
-    font-size:clamp(40px, 5.6vw, 68px);
+    font-size:clamp(33px, 5.6vw, 68px);
     font-weight:600;
     margin-bottom:22px;
-  }
-  .hero h1 em{
-    font-style:italic;font-weight:500;color:#ffc9c9;
   }
   .hero p.lead{
     font-size:18px;color:rgba(255,255,255,0.78);
@@ -218,14 +215,19 @@ body{
   .about-grid{
     display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:start;
   }
-  .about-media{
+ .about-media{
     position:relative;
     border-radius:4px;
     overflow:hidden;
-    aspect-ratio:4/5;
+    aspect-ratio:1/1;
     background:linear-gradient(160deg, var(--navy) 0%, var(--navy-soft) 100%);
-    display:flex;align-items:center;justify-content:center;
-  }
+}
+
+.about-media img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
   .about-media .frame-label{
     color:rgba(255,255,255,0.5);
     font-size:13px;letter-spacing:0.08em;text-transform:uppercase;
@@ -252,11 +254,18 @@ body{
   }
   .vm-item p{color:var(--ink);font-size:15.5px;line-height:1.65;}
 
-  @media (max-width:880px){
-    .about-grid{grid-template-columns:1fr;gap:36px;}
-    .about-media{aspect-ratio:16/9;}
-  }
+@media (max-width: 768px) {
+    .about-grid{
+        grid-template-columns: 1fr;
+    }
 
+    .about-media{
+        width: 100%;
+        aspect-ratio: 1/1;
+        max-width: 300px;
+        margin: 0 auto 30px;
+    }
+}
   /* ============ WHO IT'S FOR (chips) ============ */
   .audience{
     padding:0 0 96px;
@@ -563,12 +572,12 @@ body{
   <div class="nav-row">
     <a href="index.html" class="brand">
         <div class="logo-slot" id="logoSlot">
-        <img id="logoImg" src="./images/logo.png" alt="Prevailing Church logo">
+        <img id="logoImg" src="./images/logo2.jpeg" alt="Prevailing Church logo">
         <span class="logo-mark" id="logoMark">PC</span>
       </div>
       <div class="brand-text">
         <span class="name">Prevailing Church</span>
-        <span class="loc">Eldoret &middot; Kenya</span>
+        <span class="loc"> &middot; Kenya</span>
       </div>
     </a>
     <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
@@ -593,7 +602,7 @@ body{
     <div class="hero-inner">
       <div>
         <div class="hero-eyebrow"><span class="dash"></span>A Ministry of Prevailing Church &ndash; Kenya</div>
-        <h1>Prevailing School <em>of Ministry</em></h1>
+        <h1>Prevailing School of Ministry</h1>
         <p class="lead">A spiritual leadership institution raising biblically grounded, spiritually mature, and ministry-ready leaders to serve the church, the community, and the nations.</p>
         <div class="hero-actions">
           <a href="#inquiry" class="btn btn-primary">Apply Now</a>
@@ -628,9 +637,9 @@ body{
     <div class="wrap">
       <div class="about-grid">
         <div class="about-media">
+          <img src="./images/logo2.jpeg" alt="Prevailing School of Ministry" style="width:100%;height:100%;object-fit:cover;">
           <div class="corner tl"></div>
           <div class="corner br"></div>
-          <span class="frame-label">Prevailing School of Ministry<br>Eldoret, Kenya</span>
         </div>
         <div class="about-copy">
           <span class="eyebrow">Our Purpose</span>
@@ -814,7 +823,7 @@ body{
     <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.12);padding-top:30px;">
       <div class="fb-brand">
         <div class="logo-slot">
-          <span class="logo-mark"><img src="./images/logo.png" alt="Prevailing Church"></span>
+          <span class="logo-mark"><img src="./images/logo2.jpeg" alt="Prevailing Church"></span>
         </div>
         <span>&copy; <span id="year"></span> Prevailing Church, Eldoret-Kenya. All rights reserved.</span>
       </div>
