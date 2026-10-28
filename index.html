@@ -768,6 +768,65 @@
   .team-info .t-name{font-weight:700;font-size:15.5px;color:var(--navy);display:block;margin-bottom:3px;}
   .team-info .t-role{font-size:12.5px;color:var(--red);font-weight:600;letter-spacing:0.02em;}
 
+  /* ---- Pastors — horizontal scrolling profiles ---- */
+  .pastor-scroll-head{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:20px;
+    margin-bottom:24px;flex-wrap:wrap;
+  }
+  .pastor-scroll-head p{color:var(--ink-soft);font-size:14.5px;max-width:480px;margin:0;}
+  .pastor-scroll-nav{display:flex;gap:10px;flex-shrink:0;}
+  .psn-btn{
+    width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);
+    background:var(--white);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--navy);transition:background .2s ease,border-color .2s ease,color .2s ease;
+  }
+  .psn-btn:hover{background:var(--navy);border-color:var(--navy);color:var(--white);}
+  .psn-btn:disabled{opacity:.35;cursor:default;}
+  .psn-btn:disabled:hover{background:var(--white);border-color:var(--line);color:var(--navy);}
+
+  .pastor-scroll{
+    display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x proximity;
+    padding:4px 4px 22px;margin:0 -4px;
+    scrollbar-width:thin;scrollbar-color:var(--navy) var(--navy-pale);
+  }
+  .pastor-scroll::-webkit-scrollbar{height:7px;}
+  .pastor-scroll::-webkit-scrollbar-track{background:var(--navy-pale);border-radius:10px;}
+  .pastor-scroll::-webkit-scrollbar-thumb{background:var(--navy);border-radius:10px;}
+
+  .pastor-card{
+    flex:0 0 320px;scroll-snap-align:start;
+    background:var(--white);border:1px solid var(--line);border-radius:6px;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .pastor-photo{
+    position:relative;aspect-ratio:4/5;
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-soft) 100%);
+  }
+  .pastor-photo img{width:100%;height:100%;object-fit:cover;}
+  .pastor-info{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;}
+  .pastor-info .p-name{font-weight:700;font-size:16px;color:var(--navy);display:block;margin-bottom:3px;}
+  .pastor-info .p-role{
+    font-size:12px;color:var(--red);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+    margin-bottom:14px;display:block;
+  }
+  .pastor-info .p-bio{
+    font-size:13.5px;color:var(--ink-soft);line-height:1.65;margin:0;
+    display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .pastor-info .p-bio.expanded{display:block;-webkit-line-clamp:unset;overflow:visible;}
+  .pastor-info .p-bio p{margin:0 0 12px;}
+  .pastor-info .p-bio p:last-child{margin-bottom:0;}
+  .pastor-info .p-more{
+    margin-top:14px;background:none;border:none;padding:0;align-self:flex-start;
+    font-family:var(--font);font-size:12.5px;font-weight:700;letter-spacing:0.02em;
+    color:var(--navy);cursor:pointer;
+  }
+  .pastor-info .p-more:hover{color:var(--red);}
+
+  @media (max-width:600px){
+    .pastor-card{flex-basis:264px;}
+  }
+
   @media (max-width:920px){
     .team-grid{grid-template-columns:repeat(2,1fr);}
   }
@@ -1912,107 +1971,88 @@ Pastor Gilbert Rono serves as the Acting Deputy Secretary General of Prevailing 
 
 
 
-      <!-- Board 
+      <!-- Our Pastors — horizontal scrolling profiles -->
       <div class="lt-block">
         <div class="lt-block-head">
-          <h3>The Board</h3>
-          <span class="lt-count">Governance &amp; Oversight</span>
+          <h3>Our Pastors</h3>
+          <span class="lt-count">Serving Across Ministries</span>
         </div>
-        <div class="team-grid">
-          <div class="team-card">
-            <div class="team-photo">
-              <img src="" alt="Board Member">
-              <div class="tp-placeholder">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
-                <span>Photo</span>
-              </div>
+
+        <div class="pastor-scroll-head">
+          <p>Meet the pastors serving across our ministries &mdash; scroll to see more.</p>
+          <div class="pastor-scroll-nav">
+            <button class="psn-btn" id="pastorPrev" type="button" aria-label="Scroll pastors left">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="psn-btn" id="pastorNext" type="button" aria-label="Scroll pastors right">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="pastor-scroll" id="pastorScroll">
+
+          <div class="pastor-card">
+            <div class="pastor-photo">
+              <img src="./images/pastor-victor.jpeg" alt="Pastor Victor Kangogo">
+              
             </div>
-            <div class="team-info">
-              <span class="t-name">[Board Member Name]</span>
-              <span class="t-role">Board Chair</span>
+            <div class="pastor-info">
+              <span class="p-name">Pastor Victor Kangogo</span>
+              <span class="p-role">Youth Ministry</span>
+              <div class="p-bio">
+                <p>Victor Kangogo serves as the Youth Ministry and he is passionate about equipping and inspiring the next generation to develop a genuine and lasting relationship with Jesus Christ. He is committed to discipleship, mentorship, and raising young leaders who are grounded in God's Word and prepared to serve with integrity and purpose.</p>
+                <p>Currently pursuing a Bachelor's degree in Bible and Theology at GBSC in Cincinnati, Ohio, Victor is continually growing in biblical knowledge and ministry leadership. Raised under the mentorship of his parents Bishop Josphat &amp; Rev. Valence Mamet, he has been deeply influenced by their example of servant leadership, faithfulness, and commitment to advancing the Kingdom of God.</p>
+                <p>Through biblical teaching, fellowship, leadership development, and outreach, Victor seeks to help young people discover their God-given purpose and become active disciples of Christ. He believes that youth are not only the future of the Church but an essential part of its mission today.</p>
+                <p>His vision is to see a generation transformed by the Gospel, empowered by the Holy Spirit, and equipped to make a lasting impact in their communities and beyond for the glory of God.</p>
+              </div>
+              <button class="p-more" type="button">Read more</button>
             </div>
           </div>
-          <div class="team-card">
-            <div class="team-photo">
-              <img src="" alt="Board Member">
-              <div class="tp-placeholder">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
-                <span>Photo</span>
-              </div>
+
+          <div class="pastor-card">
+            <div class="pastor-photo">
+              <img src="./images/pastor-juliette.jpeg" alt="Rev. Juliette Blessed Keitany">
+              
             </div>
-            <div class="team-info">
-              <span class="t-name">[Board Member Name]</span>
-              <span class="t-role">Board Secretary</span>
+            <div class="pastor-info">
+              <span class="p-name">Rev. Juliette Blessed Keitany</span>
+              <span class="p-role">Acting Deputy Bishop</span>
+              <div class="p-bio">
+                <p>Rev. Blessed (Mrs Obop) is a dedicated servant of God who has faithfully served in ministry for a number of years and is passionate about preaching the Gospel of Jesus Christ, teaching the Word of God, and encouraging people to grow in faith, holiness, and their relationship with God.</p>
+                <p>Her ministry is founded on prayer, the grace of God, and a deep desire to see lives transformed, the brokenhearted encouraged, and people discover their God-given purpose. She believes in the power of the Holy Spirit, the authority of Scripture, and the unfailing love of Jesus Christ.</p>
+                <p>Her heart's desire is to serve God faithfully, win souls for Christ, strengthen believers, and be a vessel through which God's love, healing, restoration, and hope reach His people.</p>
+                <p><em>Guiding Scripture: &ldquo;Here am I; send me.&rdquo; &mdash; Isaiah 6:8 (KJV)</em></p>
+                <p>Her prayer is to remain faithful to God's calling and to serve His people with humility, love, integrity, and unwavering faith.</p>
+              </div>
+              <button class="p-more" type="button">Read more</button>
             </div>
           </div>
-          <div class="team-card">
-            <div class="team-photo">
-              <img src="" alt="Board Member">
-              <div class="tp-placeholder">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
-                <span>Photo</span>
-              </div>
+
+          <div class="pastor-card">
+            <div class="pastor-photo">
+              <img src="./images/pastor-tom.jpeg" alt="Tom Shivitsi">
+              
             </div>
-            <div class="team-info">
-              <span class="t-name">[Board Member Name]</span>
-              <span class="t-role">Board Treasurer</span>
+            <div class="pastor-info">
+              <span class="p-name">Tom Shivitsi</span>
+              <span class="p-role">Music Ministry Leader</span>
+              <div class="p-bio">
+                <p>Tom serves as Interim Pastor in charge of the Music Ministry. He is passionate about leading God's people into meaningful worship that glorifies Christ and draws believers into a deeper relationship with Him. He believes that worship goes beyond music and singing; it is a lifestyle of surrender, devotion, and wholehearted service to God.</p>
+                <p>With a heart for worship and spiritual growth, Tom is committed to nurturing a culture of unity, excellence, and humility within the music ministry. Through music, prayer, and teamwork, he seeks to encourage worshippers to use their gifts faithfully and minister with hearts that honor God.</p>
+                <p>Tom desires to see the music ministry become a place where gifts are developed, faith is strengthened, and lives are transformed through genuine worship. His vision is to raise passionate worshippers who serve with excellence, lead with humility, and use their talents to advance the Gospel and glorify God.</p>
+              </div>
+              <button class="p-more" type="button">Read more</button>
             </div>
           </div>
+
         </div>
       </div>
 
-      <!-- Pastoral 
-      <div class="lt-block">
-        <div class="lt-block-head">
-          <h3>Pastoral Team</h3>
-          <span class="lt-count">Shepherding the Congregation</span>
-        </div>
-        <div class="team-grid">
-          <div class="team-card">
-            <div class="team-photo">
-              <img src="" alt="Pastor">
-              <div class="tp-placeholder">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
-                <span>Photo</span>
-              </div>
-            </div>
-            <div class="team-info">
-              <span class="t-name">[Pastor Name]</span>
-              <span class="t-role">Associate Pastor</span>
-            </div>
-          </div>
-          <div class="team-card">
-            <div class="team-photo">
-              <img src="" alt="Pastor">
-              <div class="tp-placeholder">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
-                <span>Photo</span>
-              </div>
-            </div>
-            <div class="team-info">
-              <span class="t-name">[Pastor Name]</span>
-              <span class="t-role">Associate Pastor</span>
-            </div>
-          </div>
-          <div class="team-card">
-            <div class="team-photo">
-              <img src="" alt="Pastor">
-              <div class="tp-placeholder">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg>
-                <span>Photo</span>
-              </div>
-            </div>
-            <div class="team-info">
-              <span class="t-name">[Pastor Name]</span>
-              <span class="t-role">Youth Pastor</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section> --> 
+  </section>
 
-  <!-- SERVICE TIMES --> 
+  <!-- SERVICE TIMES -->
   <section class="services" id="services">
     <div class="wrap">
       <div class="pillars-head">
@@ -2274,6 +2314,48 @@ Pastor Gilbert Rono serves as the Acting Deputy Secretary General of Prevailing 
     });
   })();
 
+  // Pastors: horizontal scroll nav + "Read more" bio expansion
+  (function setupPastorScroll(){
+    const track = document.getElementById('pastorScroll');
+    if (!track) return;
+    const prevBtn = document.getElementById('pastorPrev');
+    const nextBtn = document.getElementById('pastorNext');
+
+    function cardStep(){
+      const card = track.querySelector('.pastor-card');
+      if (!card) return 320;
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || '22') || 22;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    function updateNavState(){
+      if (!prevBtn || !nextBtn) return;
+      const max = track.scrollWidth - track.clientWidth - 2;
+      prevBtn.disabled = track.scrollLeft <= 2;
+      nextBtn.disabled = track.scrollLeft >= max;
+    }
+
+    prevBtn?.addEventListener('click', () => {
+      track.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+    });
+    nextBtn?.addEventListener('click', () => {
+      track.scrollBy({ left: cardStep(), behavior: 'smooth' });
+    });
+    track.addEventListener('scroll', updateNavState, { passive: true });
+    window.addEventListener('resize', updateNavState);
+    updateNavState();
+
+    track.querySelectorAll('.p-more').forEach(btn => {
+      const bio = btn.previousElementSibling;
+      if (!bio || !bio.classList.contains('p-bio')) return;
+      btn.addEventListener('click', () => {
+        const expanded = bio.classList.toggle('expanded');
+        btn.textContent = expanded ? 'Show less' : 'Read more';
+      });
+    });
+  })();
+
   // Scroll-reveal: photos and section content fade/slide into view as the
   // page is scrolled, with items in the same row/grid cascading in one
   // after another rather than all popping in at once. Purely additive —
@@ -2287,7 +2369,7 @@ Pastor Gilbert Rono serves as the Acting Deputy Secretary General of Prevailing 
       { selector: '.welcome-inner, .pillars-head, .gallery-head, .lt-head, .contact-copy, .contact-details, .founder-copy, .about-copy, .theme-inner, .resources-cta, .som-content, .declaration .wrap',
         type: 'reveal-up', stagger: 90 },
       // Repeating cards / rows — cascade one after another
-      { selector: '.value-card, .scripture-card, .service-card, .team-card, .vm-item, .pillar-row',
+      { selector: '.value-card, .scripture-card, .service-card, .team-card, .vm-item, .pillar-row, .pastor-card',
         type: 'reveal-up', stagger: 70 },
       // Photographs — fade + slight rise + scale, so they feel like they're "popping up"
       { selector: '.hero-banner, .pb-img, .about-media, .founder-media, .firstlady-media, .team-photo, .services-media, .g-item',
